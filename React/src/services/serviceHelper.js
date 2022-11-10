@@ -1,0 +1,3 @@
+const API_HOST_PREFIX = process.env.REACT_APP_API_HOST_PREFIX;
+
+export { API_HOST_PREFIX };

@@ -1,0 +1,20 @@
+.site-nav {
+  background-color: rgb(114, 104, 104);
+}
+
+.site-nav-text {
+  color: #61dafb;
+}
+
+#collasible-nav-dropdown {
+  color: #61dafb;
+}
+
+.navbar-toggler-icon {
+  color: #61dafb;
+}
+
+.nav-av {
+  height: 2.5em;
+  border-radius: 50%;
+}

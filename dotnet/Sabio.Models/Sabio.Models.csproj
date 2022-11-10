@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+     <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Requests\SkillsAddRequest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stripe.net" Version="40.7.0" />
+  </ItemGroup>
+
+</Project>

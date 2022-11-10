@@ -1,0 +1,12 @@
+div.app-view-sort {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-job-title {
+  font-size: medium;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
