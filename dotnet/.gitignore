@@ -5,13 +5,13 @@
 
 # App Specific
 web.config
-# Sabio.Web.Api/ClientApp/build/
-# Sabio.Web.Api/appsettings.json
-# share-branch.sh
-# CodeMaid.config
-# TokenSecureDataFormat.cs
-# Sabio.Web.Api.csproj
-# ServiceAccount.json
+Sabio.Web.Api/ClientApp/build/
+Sabio.Web.Api/appsettings.json
+share-branch.sh
+CodeMaid.config
+TokenSecureDataFormat.cs
+Sabio.Web.Api.csproj
+ServiceAccount.json
 Program.cs
 
 
