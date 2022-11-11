@@ -63,6 +63,8 @@ namespace Sabio.Web.StartUp
 
             services.AddSingleton<IJobService, JobService>();
 
+            services.AddSingleton<IMusicService, MusicService>();
+
             services.AddSingleton<ITechCompanyService, TechCompanyService>();
 
             services.AddSingleton<IUserService, UserService>();

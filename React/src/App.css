@@ -21,3 +21,7 @@
     transform: rotate(360deg);
   }
 }
+
+button.kanban-item-dropdown-btn.hover-actions.dropdown-caret-none.dropdown-toggle.btn.btn-falcon-default.btn-sm {
+  padding: 0 0.2rem !important;
+}

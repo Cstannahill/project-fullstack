@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-const SoftBadge = ({ bg = "primary", pill, children, className }) => {
+const SoftBadge = ({ bg = "success", pill, children, className }) => {
   return (
     <div
-      className={classNames(className, `badge badge-soft-${bg}`, {
+      className={classNames(className, `badge badge-soft-${bg} text-${bg}`, {
         "rounded-pill": pill,
       })}
     >

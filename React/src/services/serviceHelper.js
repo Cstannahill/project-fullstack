@@ -1,3 +1,9 @@
-const API_HOST_PREFIX = process.env.REACT_APP_API_HOST_PREFIX;
+const onGlobalSuccess = (response) => {
+  return response.data;
+};
 
-export { API_HOST_PREFIX };
+const onGlobalError = (err) => {
+  return Promise.reject(err);
+};
+
+export { onGlobalSuccess, onGlobalError };
