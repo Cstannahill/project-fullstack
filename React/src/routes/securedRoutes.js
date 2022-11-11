@@ -12,6 +12,8 @@ const AppointmentForm = lazy(() =>
   import("../components/appointments/AppointmentForm")
 );
 const Kanban = lazy(() => import("../components/kanban/Kanban"));
+const Collection = lazy(() => import("../components/music/Collection"));
+const NowPlaying = lazy(() => import("../components/music/NowPlaying"));
 
 const securedRoutes = [
   {
@@ -53,6 +55,22 @@ const securedRoutes = [
     element: Kanban,
     roles: ["Admin"],
     isAnonymous: true,
+  },
+  {
+    path: "/music",
+    name: "Collection",
+    exact: true,
+    element: Collection,
+    roles: [],
+    isAnonymous: false,
+  },
+  {
+    path: "/music/nowplaying",
+    name: "NowPlaying",
+    exact: true,
+    element: NowPlaying,
+    roles: [],
+    isAnonymous: false,
   },
 ];
 

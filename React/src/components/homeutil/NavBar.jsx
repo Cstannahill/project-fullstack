@@ -7,6 +7,8 @@ import "../../css/navbar.css";
 import toastr from "toastr";
 import userService from "../../services/userService";
 import { UserContext } from "../../context/appContext";
+import Avatar from "../common/Avatar";
+import { useLocation } from "react-router-dom";
 const NavBar = ({ changeUser }) => {
   const onLogoutSuccess = () => {
     toastr.success("You have Logged Out");
@@ -19,6 +21,7 @@ const NavBar = ({ changeUser }) => {
     };
     changeUser(user);
   };
+  const location = useLocation();
   const currentUser = useContext(UserContext);
   const onLogoutErr = (err) => {
     console.log(err);
@@ -36,7 +39,7 @@ const NavBar = ({ changeUser }) => {
       sticky="top"
       variant="dark"
     >
-      <Container className="px-0">
+      <Container className="px-3" fluid>
         <Navbar.Brand className="site-nav-text" href="/">
           CollabFirst
         </Navbar.Brand>
@@ -47,44 +50,59 @@ const NavBar = ({ changeUser }) => {
               Card Game
             </Nav.Link>
             <NavDropdown
-              title="Appointments"
+              title="Scheduling"
               id="collasible-nav-dropdown"
               className="site-nav-text"
             >
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/appointments">
                 View Appointments
               </NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/appointmentform">
                 Add Appointments
               </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              title="Applications"
-              id="collasible-nav-dropdown"
-              className="site-nav-text"
-            >
-              <NavDropdown.Item href="/appform">
-                Add Application
-              </NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/appview">
                 View Applications
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
+              <NavDropdown.Item href="/appform">
+                Add Application
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+            </NavDropdown>
+            <NavDropdown
+              title="Music"
+              id="collasible-nav-dropdown"
+              className="site-nav-text"
+            >
+              <NavDropdown.Item href="/music">Collection</NavDropdown.Item>
+              <NavDropdown.Item href="/music/nowplaying">
+                Now Playing
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
-            {currentUser?.avatarUrl && (
-              <img
-                className="nav-av mx-2"
-                src={currentUser?.avatarUrl}
-                alt="person"
-              ></img>
-            )}
+            {currentUser?.avatarUrl &&
+              location.pathname !== "/music/nowplaying" && (
+                <Avatar
+                  size="2xl"
+                  rounded="3"
+                  className="mx-2"
+                  src={currentUser?.avatarUrl}
+                ></Avatar>
+              )}
             {currentUser?.isLoggedIn ? (
-              <Nav.Link href="" className="site-nav-text">
-                {currentUser.firstName}
-              </Nav.Link>
+              <NavDropdown
+                className="site-nav-text"
+                id="collasible-nav-dropdown"
+                title={currentUser.firstName}
+              >
+                <NavDropdown.Item href="/kanban" className="site-nav-text">
+                  Kanban
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
               <Nav.Link href="/registration" className="site-nav-text">
                 Register

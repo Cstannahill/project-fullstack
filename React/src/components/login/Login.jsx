@@ -38,6 +38,7 @@ const Login = ({ changeUser }) => {
   };
 
   const onLoginSuccess = (response) => {
+    toastr.success("You have successfully logged in.");
     userService.getCurrent().then(onGetCurrentSuccess).catch(onGetCurrentErr);
     nav("/");
   };

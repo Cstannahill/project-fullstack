@@ -27,9 +27,14 @@ const TaskDropMenu = ({ id }) => {
       <Dropdown.Toggle
         variant="falcon-default"
         size="sm"
-        className="kanban-item-dropdown-btn hover-actions dropdown-caret-none"
+        className="kanban-item-dropdown-btn hover-actions dropdown-caret-none m-0"
       >
-        <FontAwesomeIcon icon="ellipsis-h" transform="shrink-2" />
+        <FontAwesomeIcon
+          icon="ellipsis-h"
+          transform="shrink-2"
+          size="sm"
+          className="mx-0"
+        />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="py-0">
@@ -64,7 +69,7 @@ const TaskCard = ({
   });
 
   return (
-    <Draggable draggableId={`task${id}`} index={index}>
+    <Draggable draggableId={`${id}`} index={index}>
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}

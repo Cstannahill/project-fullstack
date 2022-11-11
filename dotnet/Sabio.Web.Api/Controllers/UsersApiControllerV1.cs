@@ -88,7 +88,6 @@ namespace Sabio.Web.Api.Controllers
         [AllowAnonymous]
         public ActionResult<ItemResponse<int>> Create(UserAddRequest request)
         {
-            int userId = _authService.GetCurrentUserId();
             int code = 200;
             BaseResponse response = null;
 

@@ -1,14 +1,15 @@
 import { lazy } from "react";
-const Home = lazy(() => import("../components/homeutil/Home"));
+// const Home = lazy(() => import("../components/homeutil/Home"));
+const Landing = lazy(() => import("../components/landing/Landing"));
 const Login = lazy(() => import("../components/login/Login"));
 const Registration = lazy(() => import("../components/register/Registration"));
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "Landing",
     exact: true,
-    element: Home,
+    element: Landing,
     roles: [],
     isAnonymous: true,
     isSimple: true,

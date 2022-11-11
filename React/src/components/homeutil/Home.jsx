@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <div className="text-center my-3">
-        <h1 className="my-3">CT-Dev</h1>
+        {/* <h1 className="my-3">CT-Dev</h1> */}
       </div>
       <div className="d-flex justify-content-center">
         <img src={logo} className="App-logo mb-4" alt="logo" />
