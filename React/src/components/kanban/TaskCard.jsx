@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Card, Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Background from "../common/Background";
@@ -7,15 +7,26 @@ import SoftBadge from "../common/SoftBadge";
 import Avatar, { AvatarGroup } from "../common/Avatar";
 import { Draggable } from "react-beautiful-dnd";
 import { KanbanContext } from "../../context/appContext";
+import taskService from "../../services/taskService";
+import toastr from "toastr";
 
-const TaskDropMenu = ({ id }) => {
+const TaskDropMenu = ({ id, handleEditTask }) => {
   const { kanbanDispatch } = useContext(KanbanContext);
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = "silver";
+  // }, []);
 
   const handleRemoveTaskCard = () => {
+    taskService.closeTask(id).then(onCloseTaskSuccess).catch(onCloseTaskError);
+  };
+  const onCloseTaskSuccess = () => {
     kanbanDispatch({
       type: "REMOVE_TASK_CARD",
       payload: { id },
     });
+  };
+  const onCloseTaskError = () => {
+    toastr.error("Something went wrong, task not removed!");
   };
 
   return (
@@ -34,12 +45,13 @@ const TaskDropMenu = ({ id }) => {
           transform="shrink-2"
           size="sm"
           className="mx-0"
+          color="white"
         />
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="py-0">
+      <Dropdown.Menu className="py-0 z-index-2">
         <Dropdown.Item href="#!">Add Card</Dropdown.Item>
-        <Dropdown.Item href="#!">Edit</Dropdown.Item>
+        <Dropdown.Item onClick={handleEditTask}>Edit</Dropdown.Item>
         <Dropdown.Item href="#!">Copy link</Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item onClick={handleRemoveTaskCard} className="text-danger">
@@ -51,7 +63,19 @@ const TaskDropMenu = ({ id }) => {
 };
 
 const TaskCard = ({
-  task: { id, title, members, attachments, labels, checklist },
+  task: {
+    id,
+    categoryId,
+    title,
+    members,
+    attachments,
+    labels,
+    checklist,
+    createdBy,
+    dateCreated,
+    dateModified,
+    description,
+  },
   index,
 }) => {
   const { kanbanDispatch, currentUser } = useContext(KanbanContext);
@@ -59,7 +83,44 @@ const TaskCard = ({
     attachments && attachments.find((item) => item.type === "image");
 
   const handleModalOpen = () => {
-    kanbanDispatch({ type: "OPEN_KANBAN_MODAL", payload: { image: image } });
+    kanbanDispatch({
+      type: "OPEN_KANBAN_MODAL",
+      payload: {
+        id,
+        title,
+        members,
+        attachments,
+        labels,
+        checklist,
+        createdBy,
+        dateCreated,
+        dateModified,
+        description,
+        image,
+        categoryId,
+      },
+    });
+  };
+
+  const handleEditTask = () => {
+    kanbanDispatch({
+      type: "OPEN_KANBAN_MODAL",
+      payload: {
+        id,
+        title,
+        members,
+        attachments,
+        labels,
+        checklist,
+        createdBy,
+        dateCreated,
+        dateModified,
+        description,
+        image,
+        edit: true,
+        categoryId,
+      },
+    });
   };
 
   // styles we need to apply on draggables
@@ -82,6 +143,8 @@ const TaskCard = ({
             style={getItemStyle(snapshot.isDragging)}
             className="kanban-item-card hover-actions-trigger"
             onClick={handleModalOpen}
+            bg="dark"
+            text="light"
           >
             {image && (
               <div
@@ -92,17 +155,17 @@ const TaskCard = ({
             )}
             <Card.Body>
               <div className="position-relative">
-                <TaskDropMenu id={id} />
+                <TaskDropMenu id={id} handleEditTask={handleEditTask} />
               </div>
               {labels && (
                 <div className="mb-2">
                   {labels.map((label) => (
                     <SoftBadge
-                      key={label.text}
-                      bg={label.type}
+                      key={label.name}
+                      bg={label.color.toLowerCase()}
                       className="py-1 me-1 mb-1"
                     >
-                      {label.text}
+                      {label.name}
                     </SoftBadge>
                   ))}
                 </div>

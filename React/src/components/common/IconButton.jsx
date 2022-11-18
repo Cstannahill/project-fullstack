@@ -10,9 +10,10 @@ const IconButton = ({
   iconClassName,
   transform,
   children,
+  disabled,
   ...rest
 }) => (
-  <Button {...rest}>
+  <Button disabled={disabled || false} {...rest}>
     {iconAlign === "right" && children}
     <FontAwesomeIcon
       icon={icon}

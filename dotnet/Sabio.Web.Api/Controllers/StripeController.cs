@@ -64,9 +64,6 @@ namespace server.Controllers
                 options.SuccessUrl = domain + "/success?session_id={CHECKOUT_SESSION_ID}";
                 options.CancelUrl = domain + "canceled";
 
-
-
-
                 var service = new SessionService();
                 Session session = service.Create(options);
 

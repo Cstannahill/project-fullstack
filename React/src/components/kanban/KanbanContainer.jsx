@@ -6,6 +6,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 import IconButton from "../common/IconButton";
 import is from "is_js";
 import { KanbanContext } from "../../context/appContext";
+import taskService from "../../services/taskService";
+import toastr from "toastr";
 
 const KanbanContainer = () => {
   const {
@@ -58,7 +60,9 @@ const KanbanContainer = () => {
 
     const chosenItem = newArr.splice(fromIndex, 1)[0];
     newArr.splice(toIndex, 0, chosenItem);
-
+    newArr.forEach((e, index) => (e.index = index));
+    console.log(newArr);
+    taskService.reorderTask(newArr).then(onUpdateSuccess).catch(onUpdateError);
     return newArr;
   };
 
@@ -74,14 +78,30 @@ const KanbanContainer = () => {
       updatedSourceItems: sourceItemsClone,
     };
   };
+  const onUpdateSuccess = (res) => {
+    toastr.success("Updated!");
+  };
+  const onUpdateError = () => {
+    toastr.error("Error updating lists.");
+  };
 
   const handleDragEnd = (result) => {
     const { source, destination } = result;
-
+    const targetSrc = kanbanItems.find(
+      (e) => String(e.id) === source.droppableId
+    );
     if (!destination) {
       return;
     }
 
+    if (source.droppableId !== destination.droppableId) {
+      const payload = { ...targetSrc.items[source.index] };
+      payload.categoryId = Number(destination.droppableId);
+      taskService
+        .updateTask(payload)
+        .then(onUpdateSuccess)
+        .catch(onUpdateError);
+    }
     if (source.droppableId === destination.droppableId) {
       const items = getColumn(source.droppableId).items;
       const column = getColumn(source.droppableId);
@@ -136,6 +156,7 @@ const KanbanContainer = () => {
               icon="plus"
               iconClassName="me-1"
               onClick={() => setShowForm(true)}
+              disabled={true}
             >
               Add another list
             </IconButton>

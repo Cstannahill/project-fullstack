@@ -6,3 +6,5 @@ export const KanbanContext = createContext({
   KanbanColumns: [],
   kanbanTasks: [],
 });
+
+export const ChatContext = createContext();

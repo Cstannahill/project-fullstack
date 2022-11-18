@@ -78,7 +78,7 @@ const InviteToBoard = () => {
                 type="text"
                 ref={copyTextRef}
                 readOnly
-                defaultValue="https://prium.github.io/falcon/kanban/QhNCShh8TdxKx0kYN1oWzzKJDjOYUXhm9IJ035laUVdWMYsUN5"
+                defaultValue="Coming soon"
                 className="bg-white dark__bg-dark border-0 fs--2 px-1 rounded-top-0"
               />
             </div>

@@ -1,5 +1,5 @@
-import { useEffect, useReducer } from "react";
-import { chunk } from "helpers/utils";
+import { useEffect, useReducer } from 'react';
+import { chunk } from 'helpers/utils';
 
 const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
   const setFrom = (itemsPerPage, pageNo) => itemsPerPage * (pageNo - 1) + 1;
@@ -9,7 +9,7 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
   const paginationReducer = (state, action) => {
     const { type, payload } = action;
     switch (type) {
-      case "INIT": {
+      case 'INIT': {
         const totalPage = Math.ceil(
           payload.items.length / payload.itemsPerPage
         );
@@ -28,13 +28,13 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
           canPreviousPage: payload.currentPage > 1,
           currentPage: payload.currentPage,
           paginationArray: Array.from(Array(totalPage).keys()).map(
-            (item) => item + 1
+            item => item + 1
           ),
           from: setFrom(payload.itemsPerPage, payload.currentPage),
-          to: setTo(payload.itemsPerPage, payload.currentPage, data.length),
+          to: setTo(payload.itemsPerPage, payload.currentPage, data.length)
         };
       }
-      case "NEXT_PAGE": {
+      case 'NEXT_PAGE': {
         const data = state.pageChunk[state.currentPage]
           ? state.pageChunk[state.currentPage]
           : state.data;
@@ -48,10 +48,10 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
           canNextPage: state.totalPage > state.currentPage + 1,
           canPreviousPage: state.totalPage > 1,
           from: setFrom(state.itemsPerPage, state.currentPage + 1),
-          to: setTo(state.itemsPerPage, state.currentPage + 1, data.length),
+          to: setTo(state.itemsPerPage, state.currentPage + 1, data.length)
         };
       }
-      case "PREVIOUS_PAGE": {
+      case 'PREVIOUS_PAGE': {
         const data = state.pageChunk[state.currentPage - 2]
           ? state.pageChunk[state.currentPage - 2]
           : state.data;
@@ -63,10 +63,10 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
           canNextPage: state.totalPage > 1,
           canPreviousPage: state.currentPage - 1 > 1,
           from: setFrom(state.itemsPerPage, state.currentPage - 1),
-          to: setTo(state.itemsPerPage, state.currentPage - 1, data.length),
+          to: setTo(state.itemsPerPage, state.currentPage - 1, data.length)
         };
       }
-      case "GO_TO_PAGE": {
+      case 'GO_TO_PAGE': {
         const data = state.pageChunk[payload.pageNo - 1];
         return {
           ...state,
@@ -75,7 +75,7 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
           canNextPage: state.totalPage > payload.pageNo,
           canPreviousPage: payload.pageNo > 1,
           from: setFrom(state.itemsPerPage, payload.pageNo),
-          to: setTo(state.itemsPerPage, payload.pageNo, data.length),
+          to: setTo(state.itemsPerPage, payload.pageNo, data.length)
         };
       }
       default:
@@ -95,49 +95,49 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
     canPreviousPage: false,
     from: 0,
     to: 0,
-    paginationArray: [],
+    paginationArray: []
   });
 
-  const goToPage = (pageNo) => {
+  const goToPage = pageNo => {
     dispatch({
-      type: "GO_TO_PAGE",
+      type: 'GO_TO_PAGE',
       payload: {
-        pageNo,
-      },
+        pageNo
+      }
     });
   };
 
   const nextPage = () => {
     dispatch({
-      type: "NEXT_PAGE",
+      type: 'NEXT_PAGE'
     });
   };
 
   const prevPage = () => {
     dispatch({
-      type: "PREVIOUS_PAGE",
+      type: 'PREVIOUS_PAGE'
     });
   };
 
-  const setItemsPerPage = (no) => {
+  const setItemsPerPage = no => {
     dispatch({
-      type: "INIT",
+      type: 'INIT',
       payload: {
         items,
         itemsPerPage: no,
-        currentPage,
-      },
+        currentPage
+      }
     });
   };
 
   useEffect(() => {
     dispatch({
-      type: "INIT",
+      type: 'INIT',
       payload: {
         items,
         itemsPerPage,
-        currentPage,
-      },
+        currentPage
+      }
     });
   }, [items]);
 
@@ -146,7 +146,7 @@ const usePagination = (items, itemsPerPage = 5, currentPage = 1) => {
     nextPage,
     prevPage,
     goToPage,
-    setItemsPerPage,
+    setItemsPerPage
   };
 };
 

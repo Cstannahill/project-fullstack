@@ -114,7 +114,15 @@ namespace Sabio.Services
             col.AddWithValue("@LastName", request.LastName);
             col.AddWithValue("@Email", request.Email);
             col.AddWithValue("@Password", request.Password);
-            col.AddWithValue("@AvatarUrl", request.AvatarUrl);
+            if(request.AvatarUrl != null)
+            {
+                col.AddWithValue("@AvatarUrl", request.AvatarUrl);
+            }
+            else
+            {
+                col.AddWithValue("@AvatarUrl", DBNull.Value);
+            }
+            
         }
         private static User MapSingleUser(IDataReader reader)
         {

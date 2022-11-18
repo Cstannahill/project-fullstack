@@ -80,16 +80,6 @@ namespace Sabio.Web.Api.Controllers
                     response = new ItemResponse<FriendV3> { Item = friend };
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                code = 500;
-                response = new ErrorResponse($"SqlException Error: {sqlEx.Message}");
-            }
-            catch (ArgumentException argEx)
-            {
-                code = 500;
-                response = new ErrorResponse($"ArgumentException Error: {argEx.Message}");
-            }
             catch (Exception ex)
             {
                 code = 500;

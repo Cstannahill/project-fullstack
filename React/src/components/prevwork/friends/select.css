@@ -1,0 +1,74 @@
+select.pageSelect {
+  width: 5.5% !important;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(67, 64, 64, 0.696) !important;
+  color: white;
+  border-radius: 15% !important;
+  border: 1px solid black !important;
+  text-align: start !important;
+}
+select.pageSelect option {
+  color: white;
+}
+
+.selectFormButton {
+  width: 7% !important;
+}
+
+input.searchBarComp {
+  width: 35%;
+  display: inline-block;
+}
+form.searchBarComp {
+  width: 70%;
+}
+
+li.rc-pagination-item {
+  background-color: rgba(67, 64, 64, 0.696) !important;
+  color: white;
+  border-radius: 20% !important;
+  border: 1px solid black !important;
+  /* margin-left: 0.1% !important;
+  margin-right: 0.1% !important; */
+}
+
+.rc-pagination-item-link {
+  background-color: rgba(0, 0, 0, 0.705) !important;
+  color: white !important;
+  border-radius: 20% !important;
+  font-size: large !important;
+}
+
+.selectPagedItems {
+  background-color: rgba(67, 64, 64, 0.696) !important;
+  color: white;
+  border-radius: 2% !important;
+  border: 1px solid black !important;
+}
+
+.rc-pagination-item-link:disabled {
+  background-color: rgb(57, 54, 54) !important;
+  color: rgb(57, 54, 54) !important;
+
+  border-radius: 20% !important;
+  font-size: large !important;
+}
+
+li.rc-pagination-item.rc-pagination-item-active {
+  color: rgb(3, 3, 3) !important;
+  box-shadow: 0px 0px 1px 1px rgb(11, 11, 11);
+}
+
+.fileInput::-webkit-file-upload-button {
+  background: #0b5ed7;
+  color: white;
+  border: 1px double white;
+  padding: 0.8%;
+  border-radius: 12%;
+}
+
+.fileInput::-webkit-file-upload-button:hover {
+  box-shadow: 0px 5px 5px 0px black;
+  background: #094bad;
+}

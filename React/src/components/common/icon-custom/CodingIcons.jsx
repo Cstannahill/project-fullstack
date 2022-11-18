@@ -19,7 +19,7 @@ const CodingIcons = () => {
     <>
       <Row className="mb-1">
         <Col>
-          <Card col={3} bg="dark" className="pt-1" style={{ height: "100%" }}>
+          <Card col={3} className="pt-1" style={{ height: "100%" }}>
             <Card.Img
               src={icon1}
               className="mt-2 mx-auto pt-1"
@@ -29,24 +29,19 @@ const CodingIcons = () => {
           </Card>
         </Col>
         <Col>
-          <Card col={3} className="pt-1" bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-1" style={{ height: "100%" }}>
             <Card.Img src={icon2} className="mt-2 pt-1"></Card.Img>
             <Card.Body></Card.Body>
           </Card>
         </Col>
         <Col>
-          <Card col={3} className="pt-2" bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-2" style={{ height: "100%" }}>
             <Card.Img src={icon3} className="mt-2 px-1 pt-3"></Card.Img>
             <Card.Body></Card.Body>
           </Card>
         </Col>
         <Col>
-          <Card
-            col={3}
-            className="pt-3 pb-3"
-            bg="dark"
-            style={{ height: "100%" }}
-          >
+          <Card col={3} className="pt-3 pb-3" style={{ height: "100%" }}>
             <Card.Img
               src={icon4}
               className="mt-2"
@@ -58,25 +53,25 @@ const CodingIcons = () => {
       </Row>
       <Row className="my-2">
         <Col>
-          <Card col={3} className="pt-3 " bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-3 " style={{ height: "100%" }}>
             <Card.Img src={javaScript} className="mt-3 px-1 js-icon"></Card.Img>
             <Card.Body></Card.Body>
           </Card>
         </Col>
         <Col>
-          <Card col={3} className="pt-2" bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-2" style={{ height: "100%" }}>
             <Card.Img src={bootstrap} className="mt-2 px-1 pt-3"></Card.Img>
             <Card.Body></Card.Body>
           </Card>
         </Col>
         <Col>
-          <Card col={3} className="pt-2" bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-2" style={{ height: "100%" }}>
             <Card.Img src={htmlIcon} className="mt-2 px-1 pt-3"></Card.Img>
             <Card.Body></Card.Body>
           </Card>
         </Col>
         <Col>
-          <Card col={3} className="pt-2" bg="dark" style={{ height: "100%" }}>
+          <Card col={3} className="pt-2" style={{ height: "100%" }}>
             <Card.Img
               src={cssIcon}
               className="mt-3 px-2 pt-1 mx-auto"
@@ -88,7 +83,7 @@ const CodingIcons = () => {
       </Row>
       <Row className="my-2">
         {/* <Col>
-          <Card col={3} className="pt-2" bg="dark" style={{ height: '100%' }}>
+          <Card col={3} className="pt-2"  style={{ height: '100%' }}>
             <Card.Img src={axiosIcon} className="px-1 mt-4"></Card.Img>
             <Card.Body></Card.Body>
           </Card>

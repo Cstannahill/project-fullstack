@@ -2,33 +2,60 @@ import React, { useEffect, useState } from "react";
 import musicServices from "../../services/musicService";
 import { MdAlbum } from "react-icons/md";
 import Table from "react-bootstrap/Table";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Pagination from "rc-pagination";
+import "rc-pagination/assets/index.css";
+import locale from "rc-pagination/lib/locale/en_US";
+import apiClient from "../../spotify";
+import "./music.css";
 
 const Collection = () => {
-  useEffect(() => {
-    // document.body.style.backgroundColor = "rgba(23, 22, 22, 0.935)";
-    // document.body.style.color = "silver";
-    musicServices.getPaginated(0, 50).then(getAllSuccess).catch(getAllError);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const [collection, setCollection] = useState({
     arrayOfRecords: [],
     recordComponents: [],
+    pageIndex: 0,
+    pageSize: 50,
+    current: 1,
+    totalRecords: 729,
+  });
+
+  useEffect(() => {
+    musicServices
+      .getPaginated(collection.pageIndex, collection.pageSize)
+      .then(getAllSuccess)
+      .catch(getAllError);
+  }, [collection.pageIndex, collection.pageSize]);
+
+  useEffect(() => {
+    apiClient.get("artists/{id}/top-tracks");
   });
 
   const getAllSuccess = (response) => {
     console.log(response.item.pagedItems);
+    let arrayOfRcrds = response.item.pagedItems;
+    let item = response.item;
     setCollection((prevState) => {
       const newRecords = { ...prevState };
-      newRecords.arrayOfRecords = response.item.pagedItems;
-      newRecords.recordComponents = newRecords.arrayOfRecords.map(mapRecord);
+      newRecords.arrayOfRecords = arrayOfRcrds;
+      newRecords.recordComponents = arrayOfRcrds.map(mapRecord);
+      newRecords.totalRecords = item.totalCount;
       return newRecords;
     });
   };
 
   const getAllError = (error) => {
     console.warn(error);
+  };
+
+  const onPageChange = (pageNumber) => {
+    console.log("page clicked", pageNumber);
+
+    setCollection((prevState) => {
+      const newPage = { ...prevState };
+      newPage.current = pageNumber;
+      newPage.pageIndex = newPage.current - 1;
+      return newPage;
+    });
   };
 
   const mapRecord = (record) => {
@@ -52,6 +79,19 @@ const Collection = () => {
           Vinyl C<MdAlbum />
           llection
         </h1>
+      </div>
+      <div className="d-flex justify-content-center">
+        <Pagination
+          onChange={onPageChange}
+          pageIndex={collection.pageIndex}
+          pageSize={collection.pageSize}
+          current={collection.current}
+          total={collection.totalRecords}
+          locale={locale}
+        />
+      </div>
+      <div className="row">
+        {collection.result && collection.recordComponents}{" "}
       </div>
       <Table striped>
         <thead>

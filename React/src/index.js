@@ -8,12 +8,15 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "remixicon/fonts/remixicon.css";
 import "font-awesome/css/font-awesome.min.css";
-import "../src/helpers/fontAwesomeInit";
+import Main from "./Main";
+import "./helpers/initFA";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
+    <Main>
+      <App />
+    </Main>
   </BrowserRouter>
 );
 

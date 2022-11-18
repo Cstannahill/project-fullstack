@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 import registerSchema from "../../schemas/registerSchema";
 import userService from "../../services/userService";
 import "../../css/validation.css";
+import FileDrop from "../common/FileUpload";
 
 const Registration = () => {
   const [userInfo] = useState({
@@ -21,9 +22,9 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const nav = useNavigate();
   useEffect(() => {
-    document.body.style.backgroundImage = `url(
-      "https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
-    )`;
+    // document.body.style.backgroundImage = `url(
+    //   "https://www.freecodecamp.org/news/content/images/2021/06/w-qjCHPZbeXCQ-unsplash.jpg"
+    // )`;
   }, []);
   const onRegisterAccount = (values) => {
     userService
@@ -70,7 +71,7 @@ const Registration = () => {
         validationSchema={registerSchema}
       >
         {({ values }) => (
-          <div className="mx-auto mt-4 w-25">
+          <div className="mx-auto mt-4 w-25 reg-form">
             <Form>
               <div className="mb-3">
                 <label className="form-label" name="email">
@@ -112,15 +113,16 @@ const Registration = () => {
               </div>
               <div className="mb-3">
                 <label className="form-label" name="email">
-                  Avatar URL
+                  Profile Image
                 </label>
                 <Field
                   type="url"
                   name="avatarUrl"
-                  className="form-control"
+                  className="form-control mb-2"
                   placeholder="Enter URL for avatar"
                 />
               </div>
+              <FileDrop preview={true} />
               <div className="mb-3">
                 <label className="form-label">Password</label>
                 <div className="d-flex">

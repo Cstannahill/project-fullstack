@@ -46,10 +46,14 @@ const NavBar = ({ changeUser }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="site-nav-text">
           <Nav className="me-auto">
-            <Nav.Link href="/cardview" className="site-nav-text">
-              Card Game
-            </Nav.Link>
             <NavDropdown
+              title="Games"
+              id="collasible-nav-dropdown"
+              className="site-nav-text"
+            >
+              <NavDropdown.Item href="/cardview">Card Game</NavDropdown.Item>
+            </NavDropdown>
+            {/* <NavDropdown
               title="Scheduling"
               id="collasible-nav-dropdown"
               className="site-nav-text"
@@ -71,7 +75,7 @@ const NavBar = ({ changeUser }) => {
                 Add Application
               </NavDropdown.Item>
               <NavDropdown.Divider />
-            </NavDropdown>
+            </NavDropdown> */}
             <NavDropdown
               title="Music"
               id="collasible-nav-dropdown"
@@ -80,6 +84,22 @@ const NavBar = ({ changeUser }) => {
               <NavDropdown.Item href="/music">Collection</NavDropdown.Item>
               <NavDropdown.Item href="/music/nowplaying">
                 Now Playing
+              </NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown
+              title="Social"
+              id="collasible-nav-dropdown"
+              className="site-nav-text"
+            >
+              <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
+            </NavDropdown>
+            <NavDropdown
+              title="About Devs"
+              id="collasible-nav-dropdown"
+              className="site-nav-text"
+            >
+              <NavDropdown.Item href="/aboutchristian">
+                Christian
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
@@ -99,9 +119,7 @@ const NavBar = ({ changeUser }) => {
                 id="collasible-nav-dropdown"
                 title={currentUser.firstName}
               >
-                <NavDropdown.Item href="/kanban" className="site-nav-text">
-                  Kanban
-                </NavDropdown.Item>
+                <NavDropdown.Item href="/kanban">Kanban</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <Nav.Link href="/registration" className="site-nav-text">

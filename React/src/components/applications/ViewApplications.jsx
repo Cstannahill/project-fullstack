@@ -14,8 +14,6 @@ const ViewApplications = () => {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    document.body.style.backgroundColor = "rgba(23, 22, 22, 0.935)";
-    document.body.style.color = "silver";
     if (apps.applications.length < 1) {
       applicationService
         .getAllApplications()

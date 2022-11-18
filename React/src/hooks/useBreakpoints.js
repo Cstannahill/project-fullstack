@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useBreakpoints = () => {
   const gridBreakpoints = {
@@ -7,18 +7,18 @@ export const useBreakpoints = () => {
     md: 768,
     lg: 992,
     xl: 1200,
-    xxl: 1540,
+    xxl: 1540
   };
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
 
   const [breakpoints, setBreakpoints] = useState({
-    up: (bp) => {
+    up: bp => {
       return width > gridBreakpoints[bp];
     },
-    down: (bp) => {
+    down: bp => {
       return width < gridBreakpoints[bp];
-    },
+    }
   });
   const updateDimensions = () => {
     setWidth(window.innerWidth);
@@ -26,14 +26,14 @@ export const useBreakpoints = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
   useEffect(() => {
     setBreakpoints({
-      up: (bp) => width > gridBreakpoints[bp],
-      down: (bp) => width < gridBreakpoints[bp],
+      up: bp => width > gridBreakpoints[bp],
+      down: bp => width < gridBreakpoints[bp]
     });
   }, [width]);
 

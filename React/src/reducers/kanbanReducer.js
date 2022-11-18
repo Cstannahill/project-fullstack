@@ -1,3 +1,5 @@
+import { labels } from "../components/kanban/kanbanData";
+
 export const kanbanReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -9,11 +11,31 @@ export const kanbanReducer = (state, action) => {
           modalContent: {
             ...state.kanbanModal.modalContent,
             image: payload.image,
+            payload,
           },
           show: true,
         },
       };
-
+    case "INIT_USER_BOARDS":
+      return {
+        ...state,
+        userBoards: [...payload],
+      };
+    case "SELECT_NEW_BOARD":
+      return {
+        ...state,
+        selectedBoard: payload,
+      };
+    case "INIT_BOARD_MEMBERS":
+      return {
+        ...state,
+        members: [...payload],
+      };
+    case "ADD_BOARD_LABELS":
+      return {
+        ...state,
+        labels: [...state?.labels, ...payload],
+      };
     case "TOGGLE_KANBAN_MODAL":
       return {
         ...state,
@@ -38,7 +60,10 @@ export const kanbanReducer = (state, action) => {
             : kanbanItem
         ),
       };
-
+    case "UPDATE_TASK_CARD":
+      return {
+        ...state,
+      };
     case "REMOVE_TASK_CARD":
       return {
         ...state,

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Sabio.Data;
 using Sabio.Models.Domain.Users;
 using Stripe.Terminal;
+using System;
 
 namespace Sabio.Services
 {
@@ -112,7 +113,15 @@ namespace Sabio.Services
                                col.AddWithValue("@Password", hashedPassword);
                                col.AddWithValue("@FirstName", model.FirstName);
                                col.AddWithValue("@LastName", model.LastName);
-                               col.AddWithValue("@AvatarUrl", model.AvatarUrl);
+                               if(model.AvatarUrl != null)
+                               {
+                                col.AddWithValue("@AvatarUrl", model.AvatarUrl);
+                               }
+                               else
+                               {
+                                   col.AddWithValue("@AvatarUrl", DBNull.Value);
+                               }
+                               
 
                                SqlParameter idOut = new SqlParameter("@Id", SqlDbType.Int);
                                idOut.Direction = ParameterDirection.Output;

@@ -152,3 +152,32 @@ $warning: #ffd700 !default;
 $danger: #941010 !default;
 $light: $gray-100 !default;
 $dark: $gray-1100 !default;
+
+.kanban-column {
+  border: 0.5px solid silver;
+  border-radius: 0.5rem;
+  overflow-y: visible;
+}
+
+.svg-inline--fa.fa-stack-2x {
+  font-size: 2em;
+  height: 1em;
+  width: 1em;
+}
+
+#toast-container > .toast-success {
+  background-color: #22870b;
+}
+
+#toast-container > .toast-error {
+  background-color: $youtube;
+}
+
+.edit-modal-desc {
+  margin-left: auto;
+}
+
+.active-label-color {
+  border: 0.2rem solid #0077b5;
+  border-style: inset;
+}

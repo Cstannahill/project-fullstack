@@ -16,16 +16,17 @@ const CardView = () => {
 
   var cardCounterPc = useRef(1);
   var cardCounterEc = useRef(1);
-  useEffect(() => {
-    document.body.style.backgroundImage = `url(
-      "https://external-preview.redd.it/ipmrVzxaY31_NFY07nrhDKA1dfEZ_of9MRnXEHcBb00.jpg?auto=webp&s=adc8d2be6595a68acd3f48f213ae8ff8b3e5e0a9"
-    )`;
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.backgroundImage = `url(
+  //     "https://external-preview.redd.it/ipmrVzxaY31_NFY07nrhDKA1dfEZ_of9MRnXEHcBb00.jpg?auto=webp&s=adc8d2be6595a68acd3f48f213ae8ff8b3e5e0a9"
+  //   )`;
+  // }, []);
   const onDealClicked = () => {
     setPlayerCards((prevState) => {
       let pc = { ...prevState };
       pc.remainingCards = cardDecks.playerCards.map(mapCards);
-      console.log(cardDecks);
+      console.table(cardDecks.playerCards);
+      console.table(cardDecks.enemyCards);
       pc.activeCard = pc.remainingCards[0];
       return pc;
     });

@@ -13,11 +13,7 @@ const Login = ({ changeUser }) => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  useEffect(() => {
-    document.body.style.backgroundImage = `url(
-      "https://rare-gallery.com/mocahbig/68929-Night-Sky-Lake-Milky-WayOriginal-HD-Wallpaper.png"
-    )`;
-  }, []);
+
   const nav = useNavigate();
   const onPasswordEyeClicked = () => {
     setShowPassword(!showPassword);
@@ -55,7 +51,7 @@ const Login = ({ changeUser }) => {
           initialValues={loginInfo}
           onSubmit={onLogin}
         >
-          <div className="mx-auto mt-5 w-50 card p-5">
+          <div className="mx-auto mt-5 w-50 card px-5 py-3">
             <h3 className="text-center">Login</h3>
             <Form>
               <div className="mb-3">

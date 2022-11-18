@@ -7,6 +7,8 @@ import { Droppable } from "react-beautiful-dnd";
 import IconButton from "../common/IconButton";
 import classNames from "classnames";
 import { KanbanContext } from "../../context/appContext";
+import taskService from "../../services/taskService";
+import toastr from "toastr";
 
 const KanbanColumn = ({ kanbanColumnItem }) => {
   const { id, name, items } = kanbanColumnItem;
@@ -29,6 +31,10 @@ const KanbanColumn = ({ kanbanColumnItem }) => {
     const isEmpty = !Object.keys(cardData).length;
 
     if (!isEmpty) {
+      taskService
+        .createTask({ title: newCard.title, categoryId: id })
+        .then(onCreateSuccess)
+        .catch(onCreateError);
       kanbanDispatch({
         type: "ADD_TASK_CARD",
         payload: { targetListId: id, newCard },
@@ -36,7 +42,12 @@ const KanbanColumn = ({ kanbanColumnItem }) => {
       setShowForm(false);
     }
   };
-
+  const onCreateSuccess = () => {
+    toastr.success("Task Added Successfully!");
+  };
+  const onCreateError = () => {
+    toastr.error("Task not added.");
+  };
   useEffect(() => {
     const timeout = setTimeout(() => {
       formViewRef.current.scrollIntoView({ behavior: "smooth" });

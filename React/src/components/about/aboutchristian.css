@@ -1,0 +1,13 @@
+.about-me-image {
+  height: 50vh;
+  /* width: auto; */
+  object-fit: cover;
+}
+
+.about-me-card {
+  height: 100%;
+}
+.check-badge-icon {
+  height: 2vh;
+  width: 2vw;
+}

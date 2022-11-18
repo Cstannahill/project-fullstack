@@ -47,7 +47,7 @@ namespace Sabio.Web.StartUp
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Do NOT REMOVE this line below.
             // Edits to the IUserService are OK 
-            
+
 
             services.AddSingleton<IAddressService, AddressService>();
 
@@ -65,15 +65,17 @@ namespace Sabio.Web.StartUp
 
             services.AddSingleton<IMusicService, MusicService>();
 
+            services.AddSingleton<ITaskService, TaskService>();
+
             services.AddSingleton<ITechCompanyService, TechCompanyService>();
 
             services.AddSingleton<IUserService, UserService>();
 
             services.AddSingleton<IUserServiceV1, UserServiceV1>();
 
-            
 
-           
+
+
 
         }
 

@@ -1,5 +1,12 @@
 import React, { useContext } from "react";
-import { CloseButton, Col, Modal, Row, Dropdown } from "react-bootstrap";
+import {
+  CloseButton,
+  Col,
+  Modal,
+  Row,
+  Dropdown,
+  Button,
+} from "react-bootstrap";
 import Background from "../common/Background";
 import { Link } from "react-router-dom";
 import ModalMediaContent from "./ModalMediaContent";
@@ -12,17 +19,43 @@ import ModalCommentContent from "./ModalCommentContent";
 import ModalActivityContent from "./ModalActivityContent";
 import { KanbanContext } from "../../context/appContext";
 import ModalSidebar from "./ModalSidebar";
+import { useRef } from "react";
+import { useState } from "react";
+import taskService from "../../services/taskService";
+import { useEffect } from "react";
+import toastr from "toastr";
 
 const KanbanModal = () => {
+  const [edit, setEdit] = useState(false);
   const {
     kanbanState: { kanbanModal },
+    kanbanState: { labels },
+    kanbanState: { members },
     kanbanDispatch,
   } = useContext(KanbanContext);
-
+  console.log(labels);
+  const descRef = useRef();
+  const { payload } = kanbanModal.modalContent;
   const handleClose = () => {
     kanbanDispatch({ type: "TOGGLE_KANBAN_MODAL" });
   };
-
+  const onEditClicked = () => {
+    setEdit(!edit);
+  };
+  var sendData = {};
+  const onEditAccepted = () => {
+    sendData = { ...payload };
+    sendData.description = descRef?.current?.value;
+    taskService.updateTask(sendData).then(onEditSuccess).catch(onEditError);
+    payload.description = sendData.description;
+  };
+  const onEditSuccess = () => {
+    toastr.success("Updated.");
+    setEdit(!edit);
+  };
+  const onEditError = () => {
+    toastr.error("Updates not saved.");
+  };
   return (
     <Modal
       show={kanbanModal.show}
@@ -31,12 +64,9 @@ const KanbanModal = () => {
       contentClassName="border-0"
       dialogClassName="mt-6"
     >
-      {kanbanModal.modalContent.image && (
+      {payload?.image && (
         <div className="position-relative overflow-hidden py-8">
-          <Background
-            image={kanbanModal.modalContent.image.url}
-            className="rounded-top-lg"
-          />
+          <Background image={payload?.image?.url} className="rounded-top-lg" />
         </div>
       )}
       <div className="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
@@ -47,7 +77,7 @@ const KanbanModal = () => {
       </div>
       <Modal.Body className="p-0">
         <div className="bg-light rounded-top-lg px-4 py-3">
-          <h4 className="mb-1">Add a new illustration to the landing page</h4>
+          <h4 className="mb-1">{payload?.title && payload?.title}</h4>
           <p className="fs--2 mb-0">
             Added by{" "}
             <Link to="#!" className="text-600 fw-semi-bold">
@@ -58,30 +88,46 @@ const KanbanModal = () => {
         <div className="p-4">
           <Row>
             <Col lg={9}>
-              <ModalMediaContent title="Reviewers" icon="user">
+              <ModalMediaContent title="Currently Assigned" icon="user">
                 <GroupMember
                   users={members}
                   addMember
                   showMember={6}
-                  avatarSize="xl"
+                  avatarSize="2xl"
                 />
               </ModalMediaContent>
 
               <ModalMediaContent title="Labels" icon="tag">
-                <ModalLabelContent />
+                <ModalLabelContent
+                  labels={payload?.labels && payload.labels}
+                  allLabels={labels}
+                  task={payload}
+                />
               </ModalMediaContent>
 
-              <ModalMediaContent title="Description" icon="align-left">
-                <p className="text-word-break fs--1">
-                  The illustration must match to the contrast of the theme. The
-                  illustraion must described the concept of the design. To know
-                  more about the theme visit the page.{" "}
-                  <Link to="/" target="_blank" rel="noopener noreferrer">
-                    https://falconreact.prium.me/
-                  </Link>
-                </p>
+              <ModalMediaContent
+                title="Description"
+                icon="align-left"
+                isDesc={onEditClicked}
+                submitDesc={onEditAccepted}
+                edit={edit}
+              >
+                {kanbanModal?.modalContent?.payload?.edit || edit ? (
+                  <form>
+                    <textarea
+                      type="text-area"
+                      rows={3}
+                      name="description"
+                      className="w-100"
+                      ref={descRef}
+                    />
+                  </form>
+                ) : (
+                  <p className="text-word-break fs--1">
+                    {payload?.description}
+                  </p>
+                )}
               </ModalMediaContent>
-
               <ModalMediaContent
                 title="Attachments"
                 icon="paperclip"

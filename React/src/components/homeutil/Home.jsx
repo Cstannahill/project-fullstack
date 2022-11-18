@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import logo from "../../logo.svg";
 
 const Home = () => {
-  useEffect(() => {
-    document.body.style.backgroundColor = "silver";
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = "silver";
+  // }, []);
   return (
     <>
       <div className="text-center my-3">

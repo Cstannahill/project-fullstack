@@ -23,7 +23,6 @@ namespace Sabio.Models.Requests.Users
         public string Password { get; set; }
         [Compare("Password")]
         public string PasswordConfirm { get; set; }
-        [Required]
         public string AvatarUrl { get; set; }
     }
 }

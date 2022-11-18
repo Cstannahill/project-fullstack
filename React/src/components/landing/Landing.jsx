@@ -2,12 +2,26 @@
 import bg1 from "../../assets/img/generic/bg-2.jpg";
 import CodingIcons from "../common/icon-custom/CodingIcons";
 import Section from "../common/Section";
-import { Col, Row } from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
 import { Typewriter } from "react-simple-typewriter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../css/landing.css";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/appContext";
 
 const Landing = () => {
+  const { state } = useLocation();
+  const user = useContext(UserContext);
+  useEffect(() => {
+    if (state?.type === "current_User_Information" && state?.payload) {
+      user.changeUser && user.changeUser(state.payload);
+    } else if (state?.type === "unknown_User" && state?.payload) {
+      user.changeUser && user.changeUser(state.payload);
+    }
+    console.log("landing", user.changeUser);
+  }, [state]);
   return (
     <Section
       className="py-4 overflow-hidden landing-section"
@@ -22,10 +36,13 @@ const Landing = () => {
           xl={5}
           className="pb-9 pb-xl-9 mt-3 text-center text-xl-start"
         >
+          {/* <Alert className="text-center">
+            This project is still very early in development. Most features are
+            only currently framed out.
+          </Alert> */}
           <CodingIcons />
-          {/* <Image src="https://wakatime.com/badge/user/53d17b1d-1fdb-4c23-85c0-d6d31377b62f.svg"></Image> */}
           <h1 className="text-white fw-light">
-            Made with <FontAwesomeIcon icon="fa-heart" /> &{" "}
+            Made with <FontAwesomeIcon icon="fa-heart" /> using{" "}
             <span className="fw-bold">
               <Typewriter
                 words={["SQL", "ReactJS", ".NET", "CSS3", "Bootstrap"]}
@@ -37,13 +54,7 @@ const Landing = () => {
               />
             </span>
             <br />
-            to your team
           </h1>
-          <div className="d-grid">
-            <button type="button" className="btn btn-primary">
-              Development Team
-            </button>
-          </div>
         </Col>
       </Row>
     </Section>

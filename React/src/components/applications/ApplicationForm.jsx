@@ -12,8 +12,8 @@ const ApplicationForm = () => {
   const [appFormData, setAppFormData] = useState({});
   const location = useLocation();
   useEffect(() => {
-    document.body.style.backgroundColor = "silver";
-    document.body.style.color = "black";
+    // document.body.style.backgroundColor = "silver";
+    // document.body.style.color = "black";
     if (location?.state?.type === "app_Data" && location?.state?.payload) {
       setAppFormData((prevState) => {
         let newAppFormData = { ...prevState };

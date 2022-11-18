@@ -1,6 +1,6 @@
-.site-nav {
+/* .site-nav {
   background-color: rgb(114, 104, 104);
-}
+} */
 
 .site-nav-text {
   color: #61dafb;
@@ -19,6 +19,6 @@
   border-radius: 50%;
 }
 
-.fa-stack-2x {
-  font-size: 0 !important;
-}
+/* .svg-inline--fa.fa-stack-2x {
+  font-size: 2em;
+} */
